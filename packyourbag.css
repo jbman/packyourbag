@@ -1,0 +1,16 @@
+.item-count {
+  font-weight: bold;
+  color: green;
+}
+.state-packed {
+  float:right;
+  color: green;
+}
+.state-notpacked {
+  float:right;
+  font-weight: bold;
+  color: red;
+}
+.template {
+  display:none;
+}

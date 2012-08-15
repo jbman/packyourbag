@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <title>Pack your bag</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.css" />
+  <link rel="stylesheet" href="packyourbag.css" />
+  <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" id="page-list">
+
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <div style="float:left">
+      <a href="#page-add-item" data-role="button" data-inline="true" data-mini="true" data-icon="plus">Add a thing</a>
+    </div>
+    <h1>Pack your bag</h1>
+  </div>
+
+  <div data-role="content">
+  <div>My bag for <b>5</b> days</div>
+  <ul id="template-baglist" class="template">
+    <li id="template-item">
+      <a href="#">
+        <img src="images/hanger.png" alt="Symbol of packed item" class="ui-li-icon">
+        <div class="state-notpacked">Not Packed</div>
+        <div><span id="template-description">Pairs of Trousers</span></div>
+      </a>
+    </li>
+  </ul>
+  <ul id="baglist" data-role="listview" data-inset="true" data-filter="false">
+    <li data-icon="check">
+        <a href="#">
+          <img src="images/hanger.png" alt="Symbol of packed item" class="ui-li-icon">
+          <div class="state-packed">Packed</div>
+          <div><span class="item-count">4</span> Pairs of Socks</div>
+        </a>
+    </li>
+    <li>
+      <a href="#">
+        <img src="images/t_shirt.png" alt="Symbol of packed item" class="ui-li-icon">
+        <div class="state-notpacked">Not Packed</div>
+        <div><span class="item-count">5</span> T-Shirts</div>
+      </a>
+    </li>
+  </ul>
+  </div>
+  
+</div>
+
+<div data-role="page" id="page-add-item">
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <h1>Add an item to your pack list</h1>
+  </div>
+  <div data-role="content">
+    <div>...</div>
+    <a href="#page-list" data-role="button" data-inline="true" data-icon="plus">Ok, add this</a>
+  </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+  var count = 0;
+  $("#page-add-item a").click(function(){
+    var item;
+    count++;
+    $("#template-description").html("Test " + count);
+    item = $("#template-item").clone();
+    $("#baglist").append(item);
+    $("#baglist").listview('refresh');
+  });
+</script>
+
+</html>
