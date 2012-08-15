@@ -23,7 +23,7 @@
   <div data-role="content">
   <div>My bag for <b>5</b> days</div>
   <ul id="template-baglist" class="template">
-    <li id="template-item">
+    <li id="template-item" data-icon="check">
       <a href="#">
         <img src="images/hanger.png" alt="Symbol of packed item" class="ui-li-icon">
         <div class="state-notpacked">Not Packed</div>
@@ -39,10 +39,10 @@
           <div><span class="item-count">4</span> Pairs of Socks</div>
         </a>
     </li>
-    <li>
+    <li data-icon="check">
       <a href="#">
         <img src="images/t_shirt.png" alt="Symbol of packed item" class="ui-li-icon">
-        <div class="state-notpacked">Not Packed</div>
+        <div id="state" class="state-notpacked">Not Packed</div>
         <div><span class="item-count">5</span> T-Shirts</div>
       </a>
     </li>
@@ -56,7 +56,10 @@
     <h1>Add an item to your pack list</h1>
   </div>
   <div data-role="content">
-    <div>...</div>
+    <div>
+      <label for="basic">Amount and Description</label>
+      <input type="text" name="name" id="text-new-item" value=""/>
+    </div>
     <a href="#page-list" data-role="button" data-inline="true" data-icon="plus">Ok, add this</a>
   </div>
 </div>
@@ -64,15 +67,31 @@
 </body>
 
 <script type="text/javascript">
-  var count = 0;
+  var fItemClicked;
+  fItemClicked = function(event){
+    var divState;
+    divState = $(this).find('div[class="state-notpacked"]');
+    if (divState.length != 0) {
+      divState.attr("class", "state-packed");
+      divState.html("Packed");
+    }
+    else {
+      divState = $(this).find('div[class="state-packed"]');
+      divState.attr("class", "state-notpacked");
+      divState.html("Not packed");
+    }
+  };
   $("#page-add-item a").click(function(){
-    var item;
-    count++;
-    $("#template-description").html("Test " + count);
+    var item, textNewItem;
+    textNewItem = $("#text-new-item").attr("value");
+    $("#text-new-item").attr("value", "");
+    $("#template-description").html(textNewItem);
     item = $("#template-item").clone();
     $("#baglist").append(item);
     $("#baglist").listview('refresh');
+    $("li a").click(fItemClicked);
   });
+  $("li a").click(fItemClicked);
 </script>
 
 </html>
